@@ -246,7 +246,9 @@
         /// <returns>The task object representing the asynchronous operation.</returns>
         public Task<HttpResponseMessage> PostAsJsonAsync<T>(string requestUri, T value)
         {
-            return this.PostAsJsonAsync(this.GetUriFromString(requestUri), value);
+            var uri = this.GetUriFromString(requestUri);
+            Console.WriteLine("PostAsJsonAsync: {0}", uri.ToString());
+            return this.PostAsJsonAsync(uri, value);
         }
 
         /// <summary>

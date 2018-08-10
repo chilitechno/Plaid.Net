@@ -44,5 +44,10 @@
         /// Gets a value indicating whether the operation resulted in an error.
         /// </summary>
         public bool IsError => this.Exception != null;
+
+        /// <summary>
+        /// Raw JSON Response
+        /// </summary>
+        public string RawResponse { get; internal set; }
     }
 }

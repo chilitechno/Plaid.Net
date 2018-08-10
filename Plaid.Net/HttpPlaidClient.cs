@@ -290,16 +290,36 @@
         }
 
         /// <inheritdoc />
-        public async Task<TokenExchangeResult> ExchangeBankTokenAsync(string publicToken, string accountId)
+        public async Task<TokenExchangeResult> StripeBankTokenAsync(string accessToken, string accountId)
+        {
+            Condition.Requires(accessToken).IsNotNullOrWhiteSpace();
+
+            StripeBankAccountRequest exchangeRequest = new StripeBankAccountRequest(this.clientId, this.clientSecret, accessToken, accountId);
+            HttpResponseMessage response = await this.httpClient.PostAsJsonAsync("processor/stripe/bank_account_token/create", exchangeRequest);
+            string responseJson = await response.Content.ReadAsStringAsync();
+            TokenExchangeResult result = new TokenExchangeResult();
+            result.RawResponse = responseJson;
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                StripeBankAccountResponse tokenResponse = JsonConvert.DeserializeObject<StripeBankAccountResponse>(responseJson);
+                result.BankAccountToken = tokenResponse.StripeBankAccount;
+                return result;
+            }
+
+            result.Exception = await this.ParseException(response, responseJson);
+            return result;
+        }
+
+        public async Task<TokenExchangeResult> ExchangePublicTokenAsync(string publicToken)
         {
             Condition.Requires(publicToken).IsNotNullOrWhiteSpace();
 
-            ExchangeTokenRequest exchangeRequest = new ExchangeTokenRequest(this.clientId, this.clientSecret, publicToken, accountId);
-            HttpResponseMessage response = await this.httpClient.PostAsJsonAsync("exchange_token", exchangeRequest);
+            ExchangeTokenRequest exchangeRequest = new ExchangeTokenRequest(this.clientId, this.clientSecret, publicToken);
+            HttpResponseMessage response = await this.httpClient.PostAsJsonAsync("item/public_token/exchange", exchangeRequest);
             string responseJson = await response.Content.ReadAsStringAsync();
-
             TokenExchangeResult result = new TokenExchangeResult();
-
+            result.RawResponse = responseJson;
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 ExchangeTokenResponse tokenResponse = JsonConvert.DeserializeObject<ExchangeTokenResponse>(responseJson);

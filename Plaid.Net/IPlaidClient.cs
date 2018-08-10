@@ -127,7 +127,19 @@
         /// <param name="publicToken">The public token from Plaid Link.</param>
         /// <param name="accountId">The account identifier from Plaid Link.</param>
         /// <returns>The <see cref="TokenExchangeResult"/> from the operation.</returns>
-        Task<TokenExchangeResult> ExchangeBankTokenAsync(string publicToken, string accountId);
+        Task<TokenExchangeResult> ExchangePublicTokenAsync(string publicToken);
+
+        /// <summary>
+        /// Exchanges a public token and account id for an <see cref="AccessToken"/> and bank account token.
+        /// </summary>
+        /// <remarks>
+        /// This API is used for Plaid/Stripe integration. More info here:
+        /// https://plaid.com/docs/link/stripe
+        /// </remarks>
+        /// <param name="publicToken">The public token from Plaid Link.</param>
+        /// <param name="accountId">The account identifier from Plaid Link.</param>
+        /// <returns>The <see cref="TokenExchangeResult"/> from the operation.</returns>
+        Task<TokenExchangeResult> StripeBankTokenAsync(string accessToken, string accountId);
 
         /// <summary>
         /// Gets the user's account and routing information.

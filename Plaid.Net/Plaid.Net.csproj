@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Conditions.2.1.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Conditions.dll</HintPath>
+    </Reference>
     <Reference Include="CuttingEdge.Conditions, Version=1.2.0.11174, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\packages\CuttingEdge.Conditions.1.2.0.0\lib\NET35\CuttingEdge.Conditions.dll</HintPath>
       <Private>True</Private>
@@ -54,6 +57,7 @@
     <Compile Include="Data\Contracts\Request\ExchangeTokenRequest.cs" />
     <Compile Include="Data\Contracts\Request\GetTransactionsRequest.cs" />
     <Compile Include="Data\Contracts\Request\SendMethodRequest.cs" />
+    <Compile Include="Data\Contracts\Request\StripeBankAccountRequest.cs" />
     <Compile Include="Data\Contracts\Request\TransactionOptionsRequest.cs" />
     <Compile Include="Data\Contracts\Request\UpdateUserRequest.cs" />
     <Compile Include="Data\Contracts\Request\UpdateUserRequestOptions.cs" />
@@ -71,6 +75,7 @@
     <Compile Include="Data\Contracts\Request\PlaidRequest.cs" />
     <Compile Include="Data\Contracts\Response\ExchangeTokenResponse.cs" />
     <Compile Include="Data\Contracts\Response\InstitutionResponse.cs" />
+    <Compile Include="Data\Contracts\Response\StripeBankAccountResponse.cs" />
     <Compile Include="Data\Models\AccessToken.cs" />
     <Compile Include="Data\Models\Account.cs" />
     <Compile Include="Data\Contracts\Response\AddUserResponse.cs" />

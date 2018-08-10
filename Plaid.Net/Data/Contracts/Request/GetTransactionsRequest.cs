@@ -17,6 +17,7 @@
         public GetTransactionsRequest(string clientId, string secret, string accessToken = null)
             : base(clientId, secret, accessToken)
         {
+
         }
 
         /// <summary>
